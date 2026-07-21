@@ -9,10 +9,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: development
+    if: github.event_name == 'push' && github.ref == 'refs/head/master'
 
     env:
-    SECRET_NAME: ${{ secrets.CHERRY }}
-    VARIABLE_NAME: ${{ vars.APPLE}}
+      SECRET_NAME: ${{ secrets.CHERRY }}
+      VARIABLE_NAME: ${{ vars.APPLE}}
 
     permissions:
       contents: read
@@ -24,5 +25,23 @@ jobs:
 
       - name: print out values
       - run: echo "hello world"
-      - run: echo ${{env.SECRET_NAME}}
       - run: echo ${{env.VARIABLE_NAME}}
+
+  another_test:
+    runs-on: ubuntu-latest
+    environment: development
+    if: github.event_name == 'push' && github.ref == 'refs/head/featurebranch'
+
+    env:
+      SECRET_NAME: ${{ secrets.CHERRY }}
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: print out secret value
+      - run: echo ${{env.SECRET_NAME}}
