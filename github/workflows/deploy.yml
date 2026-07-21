@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: development
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # if: github.event_name == 'push' && github.ref == 'refs/heads/master'
 
     env:
       SECRET_NAME: ${{ secrets.CHERRY }}
@@ -29,21 +29,24 @@ jobs:
       - name: print out value
         run: echo ${{ env.VARIABLE_NAME }}
 
-  another_test:
-    runs-on: ubuntu-latest
-    environment: development
-    if: github.event_name == 'push' && github.ref == 'refs/heads/featurebranch'
-
-    env:
-      SECRET_NAME: ${{ secrets.CHERRY }}
-
-    permissions:
-      contents: read
-      id-token: write
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-
       - name: print out secret value
         run: echo "Secret is configured — length $(echo -n $SECRET_NAME | wc -c) chars"
+
+  # another_test:
+  #   runs-on: ubuntu-latest
+  #   environment: development
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/featurebranch'
+
+  #   env:
+  #     SECRET_NAME: ${{ secrets.CHERRY }}
+
+  #   permissions:
+  #     contents: read
+  #     id-token: write
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+  #     - name: print out secret value
+  #       run: echo "Secret is configured — length $(echo -n $SECRET_NAME | wc -c) chars"
