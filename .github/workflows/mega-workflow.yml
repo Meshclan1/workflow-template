@@ -44,4 +44,17 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: print out secret value
-        run: echo "Secret is now configured — length $(echo -n $LONGSECRET | wc -c) chars"
+        run: echo "Secret is now configured — length $(echo -n $SECRET_COUNT | wc -c) chars"
+
+  build:
+    needs: build-2
+    runs-on: ubuntu-latest
+    steps:
+      - name: print building image
+        run: echo "Building image"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: print deploying
+        run: echo "Deploying"
