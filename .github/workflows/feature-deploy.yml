@@ -3,7 +3,7 @@ name: featue development workflow
 on:
   push:
     branches:
-      - feature
+      - featurebranch
 
 jobs:
   feature_test:
