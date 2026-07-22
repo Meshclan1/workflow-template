@@ -17,4 +17,4 @@ jobs:
 
     steps:
       - name: printing the scores
-        run: echo 5 and 'six' means 67
+        run: echo 5 and 'six' means 678
