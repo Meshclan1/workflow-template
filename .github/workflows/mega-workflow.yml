@@ -1,0 +1,47 @@
+name: mega workflow deployment
+
+on:
+  push:
+    branches:
+      - master/
+      - featurebranch/
+
+jobs:
+  build-1:
+    runs-on: ubuntu-latest
+    environment: development
+
+    permissions:
+      id-token: write
+      contents: read
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    env:
+      VARIABLE_NAME: ${{ vars.APPLE }}
+
+    steps:
+      - name: checkout code
+        uses: github/actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+
+      - name: print env value
+        run: echo ${{ env.VARIABLE_NAME }}
+  build-2:
+    runs-on: ubuntu-latest
+    environment: production
+
+    permissions:
+      id-token: write
+      contents: read
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/featurebranch'
+
+    env:
+      SECRET_COUNT: ${{ secrets.LONGSECRET }}
+
+    steps:
+      - name: checkout code
+        uses: github/actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+
+      - name: print out secret value
+        run: echo "Secret is configured — length $(echo -n $SECRET_NAME | wc -c) chars"
