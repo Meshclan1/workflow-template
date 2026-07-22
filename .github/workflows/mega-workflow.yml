@@ -3,8 +3,8 @@ name: mega workflow deployment
 on:
   push:
     branches:
-      - master/
-      - featurebranch/
+      - master
+      - featurebranch
 
 jobs:
   build-1:
@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: github/actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: print env value
         run: echo ${{ env.VARIABLE_NAME }}
@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: github/actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: print out secret value
-        run: echo "Secret is now configured — length $(echo -n $SECRET_NAME | wc -c) chars"
+        run: echo "Secret is now configured — length $(echo -n $LONGSECRET | wc -c) chars"
