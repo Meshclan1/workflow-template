@@ -9,7 +9,7 @@ jobs:
   feature_test:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event_name == 'push' && github.branch == 'ref/heads/featurebranch'
+    if: github.event_name == 'push' && github.refs == 'refs/heads/featurebranch'
 
     permissions:
       contents: read
