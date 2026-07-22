@@ -3,7 +3,7 @@ name: feature development workflow
 on:
   workflow_run:
     workflows:
-      - mega-workflow
+      - mega workflow deployment
     types:
       - completed
 
