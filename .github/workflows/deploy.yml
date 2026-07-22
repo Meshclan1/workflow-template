@@ -31,3 +31,19 @@ jobs:
 
       - name: print out secret value
         run: echo "Secret is configured — length $(echo -n $SECRET_NAME | wc -c) chars"
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running tests"
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building image"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying"
