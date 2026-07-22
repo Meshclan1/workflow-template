@@ -45,3 +45,16 @@ jobs:
 
       - name: print out secret value
         run: echo "Secret is now configured — length $(echo -n $SECRET_COUNT | wc -c) chars"
+
+  build:
+    needs: build-1
+    runs-on: ubuntu-latest
+    steps:
+      - name: print building image
+        run: echo "Building image"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: print deploying
+        run: echo "Deploying"
