@@ -1,0 +1,20 @@
+name: featue development workflow
+
+on:
+  push:
+    branches:
+      - feature
+
+jobs:
+  feature_test:
+    runs-on: ubuntu-latest
+    environment: production
+    if: github.event_name == 'push' && github.branch == 'ref/heads/featurebranch'
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: printing the scores
+        run: echo 5 and 'six'
