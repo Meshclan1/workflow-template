@@ -1,4 +1,4 @@
-name: feature development workflow
+name: featue development workflow
 
 on:
   workflow_run:
