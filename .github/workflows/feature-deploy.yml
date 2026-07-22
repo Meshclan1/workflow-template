@@ -1,15 +1,17 @@
-name: featue development workflow
+name: feature development workflow
 
 on:
-  push:
-    branches:
-      - featurebranch
+  workflow_run:
+    workflows:
+      - mega-workflow
+    types:
+      - completed
 
 jobs:
   feature_test:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event_name == 'push' && github.ref == 'refs/heads/featurebranch'
+    if: github.event.workflow_run.conclusion == 'success'
 
     permissions:
       contents: read
