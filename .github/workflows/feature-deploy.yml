@@ -9,7 +9,7 @@ jobs:
   feature_test:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event_name == 'push' && github.refs == 'refs/heads/featurebranch'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/featurebranch'
 
     permissions:
       contents: read
@@ -20,7 +20,6 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
       - name: printing the scores
         run: echo 5 and 'six' means 678
-
       - name: Show GitHub context
         run: |
           echo "Event: ${{ github.event_name }}"
