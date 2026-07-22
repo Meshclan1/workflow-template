@@ -3,18 +3,25 @@ name: featue development workflow
 on:
   push:
     branches:
-      - feature
+      - featurebranch
 
 jobs:
   feature_test:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event_name == 'push' && github.branch == 'ref/heads/featurebranch'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/featurebranch'
 
     permissions:
       contents: read
       id-token: write
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
       - name: printing the scores
-        run: echo 5 and 'six'
+        run: echo 5 and 'six' means 678
+      - name: Show GitHub context
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Ref name: ${{ github.ref_name }}"
