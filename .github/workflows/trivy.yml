@@ -37,5 +37,10 @@ jobs:
           scan-type: "fs"
           format: "table"
           severity: "CRITICAL,HIGH"
-          exit-code: "0"
+          exit-code: "1"
           ignore-unfixed: true
+      - name: Upload SARIF file as artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: trivy-results
+          path: trivy-results.sarif
